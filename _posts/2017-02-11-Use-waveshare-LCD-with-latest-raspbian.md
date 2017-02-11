@@ -13,9 +13,9 @@ author: Panu Guyson
 
 1. Download และเตรียม Raspbian ให้พร้อมใช้งาน วิธีการก็ตาม [Official Site](https://www.raspberrypi.org/documentation/installation/installing-images/README.md)
 2. update raspbian ให้เป็น version ล่าสุด ด้วยคำสั่ง
-```bash
+{% highlight bash %}
 sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
-```
+{% endhighlight %}
 3. Install git และ vim
 ```bash
 sudo apt-get install git vim
