@@ -17,6 +17,7 @@
     <meta property="twitter:title" content="{{ page.title }}" />
     {% endif %}
 
-    <meta property="og:url" content="{{ site.url }}">
+    {% capture page_url %}{{ site.baseurl | replace:'/index.html','/' | append: site.url | append: page.url }}{% endcapture %}
+    <meta property="og:url" content="{{ page_url }}">
     <meta property="og:type" content="website">
     <meta property="og:image" content="{{ site.url }}/images/share.png">
