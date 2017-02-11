@@ -17,52 +17,52 @@ author: Panu Guyson
 sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
 {% endhighlight %}
 3. Install git และ vim
-```bash
+{% highlight bash %}
 sudo apt-get install git vim
-```
+{% endhighlight %}
 4. Clone WaveShare LCD Device Tree Overlays โดย [swkim01](https://github.com/swkim01/waveshare-dtoverlays.git) ลงที่ Pi
-```bash
+{% highlight bash %}
 git clone https://github.com/swkim01/waveshare-dtoverlays.git
-```
+{% endhighlight %}
 5. Copy ไฟล์ overlay ไปยัง /boot/overlays
-```bash
+{% highlight bash %}
 sudo cp waveshare-dtoverlays/waveshare35a-overlay.dtb /boot/overlays/waveshare35a.dtbo
-```
+{% endhighlight %}
 6. เปิดไฟล์ /boot/config.txt ด้วย vi
-```bash
+{% highlight bash %}
 sudo vi /boot/config.txt
-```
+{% endhighlight %}
 7. เพิ่ม config ด้านล่าง ให้เรียกใช้ overlay และ SPI และทำการ save
-```
+{% highlight text %}
 dtparam=spi=on
 dtoverlay=waveshare35a
-```
+{% endhighlight %}
 8. เปิดไฟล์ /boot/cmdline.txt ด้วย vi
-```bash
+{% highlight bash %}
 sudo vi /boot/cmdline.txt
-```
+{% endhighlight %}
 9. เพิ่ม config โดยต่อท้ายของเดิม ให้ display console ออกทางหน้าจอ LCD
-```
+{% highlight text %}
 fbcon=map:10 fbcon=font:ProFont6x11
-```
+{% endhighlight %}
 10. แก้ไขไฟล์ /usr/share/X11/xorg.conf.d/99-fbturbo.conf ด้วย vi โดยแก้ค่าจาก /dev/fb0 เป็น /dev/fb1
 11. สร้าง driver touchscreen ด้วยการสร้างไฟล์ที่ /etc/udev/rules.d/95-ads7846.rules โดยมีเนื้อหาตามด้านล่าง
-```
+{% highlight text %}
 SUBSYSTEM=="input", KERNEL=="event[0-9]*", ATTRS{name}=="ADS7846*", SYMLINK+="input/touchscreen"
-```
+{% endhighlight %}
 12. สร้างไฟล์เก็บค่า calibation หน้าจอด้วยการสร้างไฟล์ที่ /etc/pointercal โดยมีเนื้อหาตามด้านล่าง
-```
+{% highlight text %}
 -26 -8689 33949688 -5739 -126 22326060 65536
-```
+{% endhighlight %}
 13. สร้างไฟล์ touchscreen สำหรับ X11 ที่ /etc/X11/xorg.conf.d/99-calibration.conf
-```
+{% highlight text %}
 Section "InputClass"
     Identifier "calibration"
     MatchProduct "ADS7846 Touchscreen"
     Option "Calibration" "3932 300 294 3801"
     Option "SwapAxes" "1"
 EndSection
-```
+{% endhighlight %}
 14. reboot ก็เป็นอันเสร็จสิ้น ถ้าใช้งานได้จะขึ้นเป็น GUI ของ Pixel ขึ้นมาที่หน้าจอตามรูป
 
 ![RaspberryPi 2 with WaveShare LCD](/images/2017/02/11/pi_lcd.jpg "RaspberryPi 2 with WaveShare LCD")
