@@ -1,4 +1,4 @@
-# Nukung Personal Site
+# Panu Guyson Personal Site
 
 This blog is written with markdown language with [jekyll](https://jekyllrb.com/) and hosted on [github](https://github.com/).
 
